@@ -21,7 +21,7 @@ public class ContaBancariaModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 30,nullable = false)
+    @Column(length = 30,nullable = false,unique = true)
     private String numeroDeConta;
 
     @Column(length = 30,nullable = false)
@@ -32,12 +32,13 @@ public class ContaBancariaModel {
 
     @Column(length = 50,nullable = false)
     private BigDecimal valorAtualDaConta;
-//    @Column(length = 50,nullable = false)
-//    private BigDecimal valorFinal;
-//    @Column(length = 50,nullable = false)
-//    private BigDecimal valorFornecido;
-//    @Column(length = 20,nullable = false)
-//    private String tipoDeServiço;
 
+    @Column(length = 50,nullable = false)
+    private BigDecimal valorFornecido;
 
+    @Column(length = 50,nullable = false)
+    private BigDecimal valorFinal;
+
+    @Column(length = 20,nullable = false)
+    private String tipoDeServico;
 }

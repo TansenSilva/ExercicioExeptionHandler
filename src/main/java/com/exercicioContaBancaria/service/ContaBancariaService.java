@@ -1,6 +1,7 @@
 package com.exercicioContaBancaria.service;
 
 import com.exercicioContaBancaria.model.ContaBancariaModel;
+import com.exercicioContaBancaria.model.operacoesContaBancaria.MovimentacaoFactory;
 import com.exercicioContaBancaria.repository.ContaBancariaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,16 +22,16 @@ public class ContaBancariaService {
         return repository.findById(codigo);
     }
     public ContaBancariaModel cadastrar(ContaBancariaModel conta){
-
-
+        MovimentacaoFactory movimentacao = new MovimentacaoFactory();
+        BigDecimal total = movimentacao.calculoTipoMovimentacao(conta.getTipoDeServico()).calculoMovimentacoes(conta);
         conta.getId();
         conta.getNumeroDeConta();
         conta.getAgencia();
         conta.getNomeDoUsuario();
         conta.getValorAtualDaConta();
-//        conta.setTipoDeServiço();
-//        conta.setValorFinal();
-
+        conta.getTipoDeServico();
+        conta.getValorFornecido();
+        conta.setValorFinal(total);
         return repository.save(conta);
     }
 
