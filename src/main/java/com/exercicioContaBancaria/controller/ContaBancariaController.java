@@ -33,7 +33,7 @@ public class ContaBancariaController {
     }
 
     @DeleteMapping(path = "/contabancaria/{codigo}")
-    public void deletarConta(Long codigo){
+    public void deletarConta(@PathVariable Long codigo){
         service.deletar(codigo);
     }
 }
