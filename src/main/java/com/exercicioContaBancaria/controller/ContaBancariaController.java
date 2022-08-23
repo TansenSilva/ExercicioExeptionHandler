@@ -1,10 +1,10 @@
 package com.exercicioContaBancaria.controller;
 
-
 import com.exercicioContaBancaria.model.ContaBancariaModel;
 import com.exercicioContaBancaria.service.ContaBancariaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,19 +17,18 @@ public class ContaBancariaController {
     private ContaBancariaService service;
 
     @GetMapping(path = "/contabancaria")
-    public List<ContaBancariaModel> buscarTodasContas(){
-        return service.buscarTodos();
+    public ResponseEntity<List<ContaBancariaModel>> buscarTodasContas(){
+        return ResponseEntity.ok(service.buscarTodos());
     }
 
     @GetMapping(path = "/contabancaria/{codigo}")
-    public Optional<ContaBancariaModel> buscarContaPorId(@PathVariable Long codigo){
-        return service.bucarPorId(codigo);
+    public ResponseEntity<Optional<ContaBancariaModel>> buscarContaPorId(@PathVariable Long codigo){
+        return ResponseEntity.ok(service.bucarPorId(codigo));
     }
 
     @PostMapping(path = "/contabancaria")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ContaBancariaModel cadastrarConta(@RequestBody ContaBancariaModel conta){
-        return service.cadastrar(conta);
+    public ResponseEntity<ContaBancariaModel> cadastrarConta(@RequestBody ContaBancariaModel conta){
+        return new ResponseEntity<>(service.cadastrar(conta),HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/contabancaria/{codigo}")
